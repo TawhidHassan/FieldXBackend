@@ -32,6 +32,16 @@ const officeSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please give office off time!']
   },
+  workingDay:[
+    {
+      monthName:{
+        type:String
+      },
+      days:{
+        type:Number
+      }
+    }
+  ],
   active: {
     type: Boolean,
     default: true,
@@ -40,6 +50,6 @@ const officeSchema = new mongoose.Schema({
 });
 
 
-const User = mongoose.model('Office', userSchema);
+const Office = mongoose.model('Office', officeSchema);
 
-module.exports = User;
+module.exports = Office;

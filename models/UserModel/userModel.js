@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
       ref: 'Office',
       default: null
   },
+  route:{
+    type: mongoose.Schema.Types.ObjectId,
+      ref: 'Route',
+      default: null
+  },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
