@@ -15,18 +15,24 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
-  lat: {
-    type: String,
-    default: 'null'
-  },
-  lon: {
-    type: String,
-    default: 'null'
-  },
   role: {
     type: String,
-    enum: ['user', 'admin'],
+    enum: ['USER', 'ADMIN','ORG','SR','DP'],
     default: 'user'
+  },
+  org:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null
+  },
+  image: {
+    type: String,
+    default:"N/A"
+  },
+  office:{
+    type: mongoose.Schema.Types.ObjectId,
+      ref: 'Office',
+      default: null
   },
   password: {
     type: String,
