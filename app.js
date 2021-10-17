@@ -9,6 +9,12 @@ const hpp = require('hpp');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/UserRoute/userRoutes');
+const areatRouter = require('./routes/GeoRoute/areaRoute')
+const teritoryRouter = require('./routes/GeoRoute/teritoryRoute')
+const regionRouter = require('./routes/GeoRoute/regionRoute')
+const geoRouter = require('./routes/GeoRoute/geoRoute')
+const routeRouter = require('./routes/RouteRoute/routeRouter')
+
 
 const app = express();
 
@@ -22,15 +28,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Limit requests from same API
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!'
-});
-app.use('/api', limiter);
+
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '50MB' }));
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -39,18 +40,18 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price'
-    ]
-  })
-);
+// app.use(
+//   hpp({
+//     whitelist: [
+//       'duration',
+//       'ratingsQuantity',
+//       'ratingsAverage',
+//       'maxGroupSize',
+//       'difficulty',
+//       'price'
+//     ]
+//   })
+// );
 
 // Serving static files
 // app.use(express.static(`${__dirname}/public`));
@@ -64,6 +65,11 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 app.use('/api/v1/users', userRouter);
+app.use('api/v1/area', areatRouter );
+app.use('api/v1/teritory', teritoryRouter)
+app.use('api/v1/region', regionRouter)
+app.use('api/v1/geo', geoRouter)
+app.use('api/v1/route', routeRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
