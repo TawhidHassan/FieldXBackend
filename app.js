@@ -13,8 +13,14 @@ const areatRouter = require('./routes/GeoRoute/areaRoute')
 const teritoryRouter = require('./routes/GeoRoute/teritoryRoute')
 const regionRouter = require('./routes/GeoRoute/regionRoute')
 const geoRouter = require('./routes/GeoRoute/geoRoute')
+const brandRouter = require('./routes/BrandRoute/brandRoute')
+const categoryRouter = require('./routes/CategoryRoute/categoryRoute')
+const unitRouter = require('./routes/UnitRoute/UnitRoute')
 const routeRouter = require('./routes/RouteRoute/routeRouter')
 const officeRouter = require('./routes/OfficeRoute/officeRoute')
+const targetRouter = require('./routes/TargetRoute/TargetRoute')
+const shopRouter = require('./routes/ShopRoute/ShopRoute')
+const pjpRouter = require('./routes/PjpRoute/PjpRoute')
 
 const app = express();
 
@@ -69,8 +75,14 @@ app.use('/api/v1/area', areatRouter );
 app.use('/api/v1/teritory', teritoryRouter)
 app.use('/api/v1/region', regionRouter)
 app.use('/api/v1/geo', geoRouter)
+app.use('/api/v1/brand', brandRouter)
+app.use('/api/v1/category', categoryRouter)
+app.use('/api/v1/unit', unitRouter)
+app.use('/api/v1/target', targetRouter)
 app.use('/api/v1/route', routeRouter)
 app.use('/api/v1/office', officeRouter)
+app.use('/api/v1/shop', shopRouter)
+app.use('/api/v1/pjp', pjpRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
