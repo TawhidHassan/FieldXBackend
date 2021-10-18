@@ -1,9 +1,18 @@
 const catchAsync = require('../../utils/catchAsync')
 const GeoModel = require('../../models/GeoModel/geoModel')
-
+const AreaModel = require('../../models/GeoModel/areaModel')
+const RegionModel = require('../../models/GeoModel/regionModel')
+const TeritoriModel = require('../../models/GeoModel/teritoriesModel')
 exports.creategeo = catchAsync(async (req, res, next) => {
+
+  const area= await AreaModel.findById({_id:req.body.area}).select('name -_id')
+  const region= await RegionModel.findById({_id:req.body.region}).select('name -_id')
+  const teritory= await TeritoriModel.findById({_id:req.body.teritori}).select('name -_id')
+
+  console.log(area['name']+region+teritory)
+
     const geo = await GeoModel.create({
-        name: req.body.name,
+        name: region["name"]+" "+area['name']+" "+teritory['name'],
         area: req.body.area,
         region: req.body.region,
         teritori: req.body.teritori,

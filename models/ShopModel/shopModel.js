@@ -16,6 +16,11 @@ const shopSchema = new mongoose.Schema({
         ref: 'Route',
         default: null
     },
+    org:{
+      type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: null
+    },
     ownerName:{
       type: String,
       required: [true, 'Please tell us shop owner name!']

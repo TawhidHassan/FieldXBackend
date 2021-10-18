@@ -27,7 +27,6 @@ const routeSchema = new mongoose.Schema({
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Shop',
-        default: null
       },
     ],
     availableDay: [

@@ -5,7 +5,7 @@ const validator = require('validator');
 const unitSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please tell us Area Name!']
+        required: [true, 'Please tell us Unit type!']
       },
 });
 

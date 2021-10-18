@@ -14,7 +14,7 @@ const teritoryRouter = require('./routes/GeoRoute/teritoryRoute')
 const regionRouter = require('./routes/GeoRoute/regionRoute')
 const geoRouter = require('./routes/GeoRoute/geoRoute')
 const routeRouter = require('./routes/RouteRoute/routeRouter')
-
+const officeRouter = require('./routes/OfficeRoute/officeRoute')
 
 const app = express();
 
@@ -65,11 +65,12 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 app.use('/api/v1/users', userRouter);
-app.use('api/v1/area', areatRouter );
-app.use('api/v1/teritory', teritoryRouter)
-app.use('api/v1/region', regionRouter)
-app.use('api/v1/geo', geoRouter)
-app.use('api/v1/route', routeRouter)
+app.use('/api/v1/area', areatRouter );
+app.use('/api/v1/teritory', teritoryRouter)
+app.use('/api/v1/region', regionRouter)
+app.use('/api/v1/geo', geoRouter)
+app.use('/api/v1/route', routeRouter)
+app.use('/api/v1/office', officeRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

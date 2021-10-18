@@ -26,7 +26,6 @@ const geoSchema = new mongoose.Schema({
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Route',
-          default: null
         },
       ]
 
